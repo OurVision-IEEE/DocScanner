@@ -302,6 +302,3 @@ class DocScanner(object):
         cv2.imwrite(OUTPUT_DIR + '/' + basename, thresh)
         print("Proccessed " + basename)
 
-
-if __name__ == "__main__":
-    DocScanner().scan("sample_images/test1.jpeg")
