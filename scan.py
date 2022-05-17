@@ -7,11 +7,11 @@
 
 # Scanned images will be output to directory named 'output'
 
-from pyimagesearch import transform
-from pyimagesearch import imutils
+from .pyimagesearch import transform
+from .pyimagesearch import imutils
+from .pyimagesearch import polygon_interacter as poly_i
 from scipy.spatial import distance as dist
 from matplotlib.patches import Polygon
-import polygon_interacter as poly_i
 import numpy as np
 import matplotlib.pyplot as plt
 import itertools
@@ -263,14 +263,14 @@ class DocScanner(object):
         new_points = np.array([[p] for p in new_points], dtype = "int32")
         return new_points.reshape(4, 2)
 
-    def scan(self, image_path):
+    def scan(self, input_image_path, output_image_path):
 
         RESCALED_HEIGHT = 500.0
         OUTPUT_DIR = 'output'
 
         # load the image and compute the ratio of the old height
         # to the new height, clone it, and resize it
-        image = cv2.imread(image_path)
+        image = cv2.imread(input_image_path)
 
         assert(image is not None)
 
@@ -298,7 +298,4 @@ class DocScanner(object):
         thresh = cv2.adaptiveThreshold(sharpen, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 21, 15)
 
         # save the transformed image
-        basename = os.path.basename(image_path)
-        cv2.imwrite(OUTPUT_DIR + '/' + basename, thresh)
-        print("Proccessed " + basename)
-
+        cv2.imwrite(output_image_path, thresh)
